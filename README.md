@@ -41,7 +41,7 @@ En prod las tablas se crean con `schema-postgresql.sql`
 
 ### Resultados de la Parte 1
 - `docker build` construye la imagen sin errores. Las capas suman
-  unos 270 MB (Alpine + JRE 21 ≈ 212 MB y el JAR ≈ 58 MB); comprimida
+  unos 272 MB (Alpine + JRE 21 ≈ 212 MB y el JAR ≈ 60 MB); comprimida
   pesa 128 MB. Con el almacén de imágenes de containerd, `docker images`
   muestra además "DISK USAGE" (≈ 400 MB) porque cuenta la copia
   comprimida y la descomprimida.
@@ -157,3 +157,9 @@ Estado: pendiente de hacer con la cuenta del dueño del repositorio.
 6. Consultar el pipeline en la pestaña Actions del repositorio
 
 Sin Docker: `./mvnw spring-boot:run` (perfil dev) y `./mvnw verify` para las pruebas.
+
+## Capturas de pantalla
+![Imagen Docker construida localmente](capturas/docker-images.png)
+![Contenedor con perfil dev sin variables de entorno](capturas/contenedor-dev.png)
+![Contenedor con perfil prod, PostgreSQL y endpoints REST](capturas/contenedor-prod.png)
+![Contenedor respondiendo UP en local (dev y prod)](capturas/actuator-health-local.png)
