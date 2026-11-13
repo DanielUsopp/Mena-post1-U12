@@ -55,6 +55,12 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Monitoreo: /actuator/health para el smoke test del pipeline -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

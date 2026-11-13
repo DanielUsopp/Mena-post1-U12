@@ -97,6 +97,11 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/login", "/registro",
                                  "/css/**", "/js/**", "/error").permitAll()
+                // Actuator sin login: el smoke test del pipeline y la plataforma de
+                // despliegue consultan /actuator/health. Que endpoints existen lo
+                // decide management.endpoints.web.exposure.include segun el perfil
+                // (en prod solo health e info; el resto responde 404).
+                .requestMatchers("/actuator/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
