@@ -7,8 +7,6 @@ con un Dockerfile multi-stage y perfiles dev/prod (Parte 1), y su
 extensión con un pipeline de integración continua con GitHub
 Actions y monitoreo con Spring Boot Actuator (Parte 2).
 
-![CI Status](https://github.com/DanielUsopp/Mena-post1-U12/actions/workflows/ci.yml/badge.svg)
-
 La aplicación es la de la Unidad 9 (Usuario/Tarea con login por
 sesión para las vistas Thymeleaf y API REST con JWT en `/api/**`),
 traída en el primer commit y adaptada aquí para correr en contenedor.
