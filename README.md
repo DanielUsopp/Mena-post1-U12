@@ -163,3 +163,10 @@ Sin Docker: `./mvnw spring-boot:run` (perfil dev) y `./mvnw verify` para las pru
 ![Contenedor con perfil dev sin variables de entorno](capturas/contenedor-dev.png)
 ![Contenedor con perfil prod, PostgreSQL y endpoints REST](capturas/contenedor-prod.png)
 ![Contenedor respondiendo UP en local (dev y prod)](capturas/actuator-health-local.png)
+![GitHub Actions con checks verdes](capturas/github-actions.png)
+![Jobs build-and-test y docker-build encadenados con needs](capturas/pipeline-jobs.png)
+![Smoke test respondiendo UP en el pipeline](capturas/smoke-test-log.png)
+
+El log del smoke test se tomó del job `docker-build` de la ejecución
+#3 (descargado desde la API de Actions, porque GitHub no muestra los
+logs en la web sin iniciar sesión).
