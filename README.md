@@ -78,11 +78,17 @@ verifica que `/actuator/health` responde UP sin login y que
 `/api/tareas` sin token responde 401.
 
 ## Despliegue (paso final manual)
-La plataforma (Railway o Render) construye la imagen a partir del
+La aplicacion esta desplegada en Railway a partir del mismo
+Dockerfile, con las variables de entorno configuradas en el panel
+de la plataforma y una base PostgreSQL de Railway:
+- URL de la aplicacion: https://mena-post1-u12-production.up.railway.app
+- /actuator/health: https://mena-post1-u12-production.up.railway.app/actuator/health
+
+La plataforma construye la imagen a partir del
 mismo Dockerfile del repositorio; el workflow de GitHub Actions no
 necesita ningún Secret de la plataforma.
 
-Pasos en Railway:
+Pasos que se siguieron en Railway:
 1. Entrar a railway.app con la cuenta de GitHub y crear un proyecto
    con "Deploy from GitHub repo" → `Mena-post1-U12`.
 2. Agregar una base de datos PostgreSQL al proyecto.
@@ -97,7 +103,15 @@ Pasos en Railway:
 4. Generar el dominio público y verificar
    `https://<app>.up.railway.app/actuator/health` → `{"status":"UP"}`.
 
-Estado: pendiente de hacer con la cuenta del dueño del repositorio.
+Verificación en la URL pública: los logs del despliegue muestran
+`The following 1 profile is active: "prod"`, `/actuator/health`
+responde `{"status":"UP"}` (sin detalles, como corresponde a prod),
+`/actuator/beans` responde 404, `/api/tareas` sin token responde 401 y,
+con un usuario registrado desde `/registro`, el login por API devuelve
+el token y `/api/tareas` responde 200. Railway también redespliega solo
+en cada push a `main`. El plan usado es el de prueba de Railway
+(30 días o 5 USD de crédito), así que la URL deja de responder cuando
+ese crédito se acaba.
 
 ## Decisiones de diseño
 
@@ -166,6 +180,10 @@ Sin Docker: `./mvnw spring-boot:run` (perfil dev) y `./mvnw verify` para las pru
 ![GitHub Actions con checks verdes](capturas/github-actions.png)
 ![Jobs build-and-test y docker-build encadenados con needs](capturas/pipeline-jobs.png)
 ![Smoke test respondiendo UP en el pipeline](capturas/smoke-test-log.png)
+![Panel de Railway con el despliegue activo](capturas/railway-panel.png)
+![Variables configuradas en Railway (valores ocultos)](capturas/railway-variables.png)
+![Endpoint /actuator/health respondiendo en la URL publica](capturas/railway-health.png)
+![Endpoints de la API probados contra la URL publica](capturas/railway-endpoints.png)
 
 El log del smoke test se tomó del job `docker-build` de la ejecución
 #3 (descargado desde la API de Actions, porque GitHub no muestra los
